@@ -21,6 +21,7 @@
 								<tr>
 									<th>Id</th>
 									<th>Fecha</th>
+									<th>Fecha2</th>
 									<th>Titulo</th>
 									<th>Victima</th>
 									<th>Municipio</th>
@@ -46,6 +47,7 @@
 											while(!$rs_sucesos->EOF){
 												echo '<tr>';
 													echo '<td><a class="btn ampliar" href="suceso.php?suceso_id='.$rs_sucesos->Fields('suceso_id').'" class="btn btn-primary btn-lg">'.$rs_sucesos->Fields('suceso_id').'</a></td>';
+													echo '<td>'. $rs_sucesos->Fields('fecha_suceso') . '</td>';
 													echo '<td><span style="display: none;">'. $rs_sucesos->Fields('fecha_suceso') ."</span>".normaliza($rs_sucesos->Fields('fecha_suceso')). '</td>';
 													echo '<td>'. $rs_sucesos->Fields('titulo') . '</td>';
 													echo '<td>'. $rs_sucesos->Fields('nombre_victima') . '</td>';
