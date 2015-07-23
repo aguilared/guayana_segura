@@ -36,7 +36,8 @@ $query_delitos = $db->Prepare("SELECT delito_id, descripcion
 					FROM delitos");
 
 $query_delitos_deta = $db->Prepare("SELECT delito_detalle_id, delito_id, descripcion
-					FROM delitos_detalles");
+					FROM delitos_detalles
+					WHERE delito_id = 1");
 					
 $query_municipios = $db->Prepare("SELECT municipio_id, descripcion, estado_id
 					FROM municipios
@@ -91,27 +92,10 @@ $rs_parroquias = $db->Execute($query_parroquias);
 
 
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="delito">Delito:</label>
-					<div class="col-xs-4">
-						<select class="form-control input-sm" name="delito_id" id="delito_id" onchange="carga_deta_delito($('#delito_id').val());return false;">
-							<option selected value="0" >Seleccione</option>
-							<?php while(!$rs_delitos->EOF){  
-							
-								if ($rs_delitos->Fields('delito_id') == $delito_id) {
-									//Selecciona este registro
-									echo "\t<option value=\"" . $rs_delitos->Fields('delito_id') . "\" selected=\"selected\">" . $rs_delitos->Fields('descripcion') ."</option>\n"; 
-								}else{ ?>
-								<option value="<?php echo $rs_delitos->Fields('delito_id'); ?>"><?php echo $rs_delitos->Fields('descripcion'); ?></option>
-								<?php 
-								}
-							$rs_delitos->MoveNext();
-							} //fin while	
-						$rs_delitos->MoveFirst();?>
-					  </select>
-					</div>
-				
+									
 					<label class="control-label col-xs-2" for="detalle_delito">Detalle:</label>
-					<div class="col-xs-4">
+					<input name="delito_id" id="delito_id"type="hidden" value="<?php echo 1; ?>">
+					<div class="col-xs-10">
 						<select class="form-control input-sm" name="delito_detalle_id" id="delito_detalle_id">
 							<option selected value="0" >Seleccione</option>
 							<?php while(!$rs_delitos_deta->EOF){ 

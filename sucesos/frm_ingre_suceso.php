@@ -7,7 +7,8 @@ $db->debug = false;
 $query_delitos = $db->Prepare("SELECT delito_id, descripcion
 					FROM delitos");
 $query_delitos_deta = $db->Prepare("SELECT delito_detalle_id, delito_id, descripcion
-					FROM delitos_detalles");
+					FROM delitos_detalles
+					WHERE delito_id = 1");
 				
 $query_municipios = $db->Prepare("SELECT municipio_id, descripcion, estado_id
 					FROM municipios
@@ -59,20 +60,11 @@ $rs_parroquias = $db->Execute($query_parroquias);
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-xs-2" for="delito">Delito:</label>
-										<div class="col-xs-4">
-											<select class="form-control input-sm" name="delito_id" id="delito_id" onchange="carga_deta_delito($('#delito_id').val());return false;">
-												<option selected value="0" >Seleccione</option>
-												<?php while(!$rs_delitos->EOF){ ?>
-												<option value="<?php echo $rs_delitos->Fields('delito_id'); ?>"><?php echo $rs_delitos->Fields('descripcion'); ?></option>
-												<?php $rs_delitos->MoveNext();
-															}
-												$rs_delitos->MoveFirst();?>
-											</select>
-										</div>
+										
 									
 										<label class="control-label col-xs-2" for="detalle_delito">Detalle:</label>
-										<div class="col-xs-4">
+										<input name="delito_id" id="delito_id"type="hidden" value="<?php echo 1; ?>">
+										<div class="col-xs-10">
 											<select class="form-control input-sm" name="delito_detalle_id" id="delito_detalle_id">
 												<option selected value="0" >Seleccione</option>
 												<?php while(!$rs_delitos_deta->EOF){ ?>
@@ -81,6 +73,7 @@ $rs_parroquias = $db->Execute($query_parroquias);
 												}
 												$rs_delitos_deta->MoveFirst();?>
 											</select>
+
 										</div>
 									</div>
 									
@@ -238,7 +231,7 @@ $rs_parroquias = $db->Execute($query_parroquias);
 										//municipio : "Debe introducir un municipio.",
 									},
 									submitHandler: function(form){
-										var dataString = 'fecha='+$('#fecha').val()+'&delito_id='+$("select#delito_id").val()+'&delito_detalle_id='
+										var dataString = 'fecha='+$('#fecha').val()+'&delito_id='+$('#delito_id').val()+'&delito_detalle_id='
 										+$("select#delito_detalle_id").val()+'&titulo='+$('#titulo').val()+'&fuente='+$('#fuente').val()
 										+'&otra_fuente1='+$('#otra_fuente1').val()+'&otra_fuente2='+$('#otra_fuente2').val()
 										+'&municipio='+$("select#municipio").val()+'&parroquia='+$("select#parroquia").val()

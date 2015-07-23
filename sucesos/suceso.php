@@ -33,7 +33,9 @@ $conexion=new Conexion();
 	$tipo_arma = $rs_sucesos->Fields('tipo_arma');
 	$sector = $rs_sucesos->Fields('sector');
 	$usuario = $rs_sucesos->Fields('usuario');
- 
+    $img = $suceso_id.".jpg";
+    $img1 = $suceso_id."_1.jpg";
+    $img2 = $suceso_id."_2.jpg";
 ?>
    	   
 	   
@@ -44,27 +46,43 @@ $conexion=new Conexion();
 	  <div class="modal-body">
 
 		<div class="panel panel-primary">
-			<div class="panel-heading">Informacion del Suceso: <?php echo $rs_sucesos->Fields('suceso_id');?>
+			<div class="panel-heading">Informacion del Sucesoss: <?php echo $suceso_id;?>
 				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 				<div class="panel-body">
 					<h4>Fecha Suceso:<?php echo normaliza($rs_sucesos->Fields('fecha_suceso'));?></h4>
-					<h4>Delito: <?php echo $tipo_delito;?></h4>
-					<h4>Detalle delito: <?php echo $detalle_delito;?></h4>
+					<h4>Detalle: <?php echo $detalle_delito;?></h4>
 					<h4>Titulo: <?php echo $titulo;?></h4>
-					<h4>Fuente: <a href="<?php echo $fuente;?>" target="_blank"><?php echo $fuente;?></a></h4>
-					<h4>Otra Fuente1: <a href="<?php echo $otra_fuente1;?>" target="_blank"><?php echo $otra_fuente1;?></a></h4>
-					<h4>Otra Fuente2: <a href="<?php echo $otra_fuente2;?>" target="_blank"><?php echo $otra_fuente2;?></a></h4>
-					<h4>Municipio: <?php echo $municipio;?></h4>
-                    <h4>Parroquia: <?php echo $parroquia;?></h4>
-					<h4>Nombre Victima: <?php echo $nombre_victima;?></h4>
-					<h4>Sexo: <?php echo $sexo;?></h4>
-					<h4>Edad: <?php echo $edad;?></h4>
+					<div class="row">
+					  <div class="col-xs-6 col-md-4">
+					  	<label class="control-label col-sm-4" for="fecha">Fuente:</label>
+					    <a href="<?php echo $fuente;?>" class="thumbnail" target="_blank"><img src="../img/<?php echo $img;?>" alt="..."></a>
+					  </div>
+					  <div class="col-xs-6 col-md-4">
+					  	<label class="control-label col-sm-4" for="fecha">Fuente1:</label>
+					    <a href="<?php echo $otra_fuente1;?>" class="thumbnail" target="_blank"><img src="../img/<?php echo $img1;?>" alt="..."></a>
+					  </div>
+					  <div class="col-xs-6 col-md-4">
+					  	<label class="control-label col-sm-4" for="fecha">Fuente2:</label>
+					    <a href="<?php echo $otra_fuente2;?>" class="thumbnail" target="_blank"><img src="../img/<?php echo $img2?>" alt="..."></a>
+					  </div>
+					</div>
+					
+					<h4>Municipio: <?php echo $municipio;?> Parroquia: <?php echo $parroquia;?></h4>
+                    <h4>Nombre Victima: <?php echo $nombre_victima;?></h4>
+					<h4>Sexo: <?php echo $sexo;?> Edad: <?php echo $edad;?></h4>
 					<h4>Tipo Arma: <?php echo $tipo_arma;?></h4>
 					<h4>Sector: <?php echo $sector;?></h4>
 					<h4>Usuario: <?php echo $usuario;?></h4> 
 				</div>
 			
+				
+
+
+
+
+
+
 			
 		</div>
 		
