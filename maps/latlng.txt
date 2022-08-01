@@ -1,0 +1,40 @@
+https://codepen.io/jhawes/pen/ujdgK
+
+{lat: 8.33414, lng: -62.71554}, 
+{lat: 8.33758, lng: -62.71425}, 
+{lat: 8.33932, lng: -62.71674}, 
+{lat: 8.34383, lng: -62.72241}, 
+{lat: 8.3423, lng: -62.74713}, 
+{lat: 8.33567, lng: -62.76481}, 
+{lat: 8.31516, lng: -62.75979}, 
+{lat: 8.29703, lng: -62.75202}, 
+{lat: 8.30234, lng: -62.73138}, 
+{lat: 8.29908, lng: -62.72012}, 
+{lat: 8.30194, lng: -62.7123}, 
+{lat: 8.3158, lng: -62.68722}
+
+
+
+{lat: 8.3451801, lng: -62.7209473},
+{lat: 8.3451801, lng: -62.7209473},
+{lat: 8.3339703, lng: -62.7688408},
+{lat: 8.3339703, lng: -62.7688408},
+{lat: 8.2904866, lng: -62.7470398},
+{lat: 8.293799,  lng: -62.7456665},
+{lat: 8.2984703, lng: -62.7365685},
+{lat: 8.3011881, lng: -62.7317619},
+{lat: 8.3011881, lng: -62.7317619},
+{lat: 8.2978758, lng: -62.7220631}
+
+
+new google.maps.Polygon({
+          map: map,
+          paths: 5dejulioCoords,
+          strokeColor: '#2F4F4F',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#2F4F4F',
+          fillOpacity: 0.35,
+          draggable: false,
+          geodesic: true
+        });

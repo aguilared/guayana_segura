@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon oncedeabril</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.362503, lng: -62.663097},  
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+          {lat: 8.38712, lng: -62.59117}, //limite con Vistal sol mas al nort la sierra
+          {lat: 8.37873, lng: -62.60672}, //limite con 5 julio terminal d busetas
+          {lat: 8.37723, lng: -62.61652}, //limite vista al sol 11 de abril
+          {lat: 8.36745, lng: -62.61498}, //curva mas abajo d casa d madera
+          {lat: 8.35825, lng: -62.61881}, //csade madera
+          {lat: 8.35504, lng: -62.63239}, //Villa la manga
+          {lat: 8.36114, lng: -62.63457}, //BOD
+          {lat: 8.36522, lng: -62.64287}, //Villa la manga
+          {lat: 8.36751, lng: -62.64754}, //batallas pricipal
+          {lat: 8.37192, lng: -62.65262}, //batallas
+          {lat: 8.37944, lng: -62.65850}, //Intercon muelle san felix con 11deabril
+          {lat: 8.38981, lng: -62.63924}, //
+          {lat: 8.39847, lng: -62.62947}, //limite norte Rio 
+          {lat: 8.42508, lng: -62.60854}, //limite norte Rio Claro
+          {lat: 8.38952, lng: -62.53555}, //limite norte Rio Claro
+        ];
+
+        // Construct the polygon.
+        var oncedeabrilParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        oncedeabrilParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        oncedeabrilParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia oncedeabril</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

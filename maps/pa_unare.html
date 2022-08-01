@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Parroquia Unare, Municipio Caroni, Estado Bolivar, Venezuela</title> 
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<style> 
+		#map_canvas { 
+		  border:1px solid black;
+		  height: 400px;
+		  width: 100%;
+		  border-radius: 4px;
+		}
+	</style>
+</head> 
+<body>
+  <div id="map_canvas"></div>
+
+  <script type="text/javascript">
+				
+		var locations = [
+      ['Orinoquia', 8.271022, -62.877052, 4],
+      ['Cambalache', 8.337438, -62.770107, 5],
+      ['La ceiba', 8.276628, -62.960994, 3],
+      ['Caruachi', 8.161861, -62.802723, 2],
+	  ['Toro Muerto', 8.252123, -62.718780, 6],
+      ['Rio Negro', 8.270130, -62.741955, 1]
+    ];
+		var map;
+		var markers = [];
+
+		function init(){
+		  map = new google.maps.Map(document.getElementById('map_canvas'), {
+			zoom: 10,
+			center: new google.maps.LatLng(8.25, -62.96),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		  });
+
+		  var num_markers = locations.length;
+		  for (var i = 0; i < num_markers; i++) {  
+			markers[i] = new google.maps.Marker({
+			  position: {lat:locations[i][1], lng:locations[i][2]},
+			  map: map,
+			  html: locations[i][0],
+			  id: i,
+			});
+			  
+			google.maps.event.addListener(markers[i], 'click', function(){
+			  var infowindow = new google.maps.InfoWindow({
+				id: this.id,
+				content:this.html,
+				position:this.getPosition()
+			  });
+			  google.maps.event.addListenerOnce(infowindow, 'closeclick', function(){
+				markers[this.id].setVisible(true);
+			  });
+			  this.setVisible(false);
+			  infowindow.open(map);
+			});
+		  }
+		}
+
+		init();
+  </script>
+</body>
+</html>

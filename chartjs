@@ -1,0 +1,70 @@
+
+
+SELECT 2017 AS 'ano', MONTH(fecha_suceso) AS mes, COUNT(fecha_suceso) As ano1
+FROM sucesos
+WHERE YEAR(fecha_suceso) = 2017  AND municipio_id = 3 AND delito_detalle_id = 7
+GROUP BY MONTH(fecha_suceso)
+
+
+
+SELECT
+	2017 AS 'ano'
+	FROM sucesos
+	WHERE YEAR(fecha_suceso) = 2017  AND municipio_id = 3 AND delito_detalle_id = 7
+
+
+[{"ano":"2017","ene":"65","feb":"68","mar":"75","abr":"68","may":"45","jun":"51","jul":"6","ago":"0","sep":"0","oct":"0","nov":"0","dic":"0"}]
+
+
+
+[{"userid":"1","facebook":"100","twitter":"200","googleplus":"80"},{"userid":"2","facebook":"60","twitter":"150","googleplus":"180"},{"userid":"3","facebook":"50","twitter":"90","googleplus":"120"}]
+
+
+[{"userid":"1","facebook":"100","twitter":"200","googleplus":"80"},
+{"userid":"2","facebook":"60","twitter":"150","googleplus":"180"},
+{"userid":"3","facebook":"50","twitter":"90","googleplus":"120"}]
+
+
+[{"mes":"1","2017":"100","2016":"200"},
+{"mes":"2","2017":"100","2016":"200"},
+{"mes":"3","2017":"100","2016":"200"}]
+
+
+CREATE TABLE `sucesos_mes` (
+  `mes` int(10) UNSIGNED NOT NULL,
+  `ano1` int(11) DEFAULT '0',
+  `ano2` int(11) DEFAULT '0',
+  `ano3` int(11) DEFAULT '0',
+  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `followers`
+--
+
+[{"ano":"2017","ene":"65","feb":"68","mar":"75","abr":"68","may":"45","jun":"51","jul":"6","ago":"0","sep":"0","oct":"0","nov":"0","dic":"0"}]
+
+[{"ano":"2017","1":"65","2":"68","3":"75","4":"68","5":"45","6":"51","7":"6","8":"0","9":"0","10":"0","11":"0","12":"0"}]
+
+
+INSERT INTO ``sucesos_mes`` (`mes`, `ano1`, `ano2`, `ano3`) VALUES
+(1, 100, 200, 80),
+(2, 60, 150, 180),
+(3, 50, 90, 120);
+(4, 100, 200, 80),
+(5, 60, 150, 180),
+(6, 50, 90, 120);
+(7, 100, 200, 80),
+(8, 60, 150, 180),
+(9, 50, 90, 120);
+(10, 100, 200, 80),
+(11, 60, 150, 180),
+(12, 50, 90, 120);
+
+SELECT MONTH(fecha_suceso) AS mes, COUNT(fecha_suceso) As ano1, COUNT(fecha_suceso) As ano2
+FROM sucesos
+WHERE YEAR(fecha_suceso) = 2017  AND municipio_id = 3 AND delito_detalle_id = 7
+GROUP BY MONTH(fecha_suceso)
+
+INSERT INTO `sucesos_mes` (`mes`, `ano1`, `ano2`, `ano3`) VALUES
+(1, , 300, 800) WHERE mes = 1

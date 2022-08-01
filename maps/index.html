@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon Cachamay</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.285465, lng: -62.719059},
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+            {lat: 8.33414, lng: -62.71554}, 
+            {lat: 8.33758, lng: -62.71425},
+            {lat: 8.33932, lng: -62.71674}, 
+            {lat: 8.34383, lng: -62.72241}, 
+            {lat: 8.3423, lng: -62.74713}, 
+            {lat: 8.33567, lng: -62.76481}, 
+            {lat: 8.31516, lng: -62.75979}, 
+            {lat: 8.29703, lng: -62.75202}, 
+            {lat: 8.30234, lng: -62.73138}, 
+            {lat: 8.29908, lng: -62.72012}, 
+            {lat: 8.30194, lng: -62.7123}, 
+            {lat: 8.3158, lng: -62.68722}
+        ];
+
+        // Construct the polygon.
+        var cachamayParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        cachamayParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        cachamayParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia Cachamay</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon 5 de julio</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.36946, lng: -62.55941},   
+
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+          {lat: 8.34543, lng: -62.59855}, //la  Victoria
+          {lat: 8.35384, lng: -62.6057}, //la  granja
+          {lat: 8.36377, lng: -62.6057}, //limite con 5 julio canal
+          {lat: 8.37873, lng: -62.60672}, //limite con 5 julio terminal d busetas
+          {lat: 8.38713, lng: -62.59121}, //limite con 11 de abril
+          {lat: 8.38712, lng: -62.59117}, //limite con 11 de mas al nort la sierra
+          {lat: 8.38952, lng: -62.53555}, //limite norte delta amacuro 1
+          {lat: 8.35752, lng: -62.47076}, //limite norte delta amacuro yocoima
+        ];
+
+        // Construct the polygon.
+        var chiricaParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        chiricaParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        chiricaParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia 5 de julio</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

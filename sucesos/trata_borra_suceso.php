@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
+
 </head>
 
 <body>
 <script src="../js/bootstrap.min.js"></script>
 </body>
 
-<?php 
+<?php
 
 include_once '../connections/guayana_s.php';
 
@@ -18,11 +18,11 @@ $conexion=new Conexion();
 $db=$conexion->getDbConn();
 $db->debug = false;
 
-$suceso_id = $_GET['suceso_id'];  
+$suceso_id = $_GET['suceso_id'];
 
 $rs=$db->Execute("DELETE `sucesos`.* FROM sucesos WHERE suceso_id='$suceso_id'");
 
-if (!$db->affected_rows()) { 
+if (!$db->affected_rows()) {
 	$db->Close();
 	//mensaje de error si la modificaci�n fall� o no se modifico nada
 	echo ("<script> alert ('No se ha Borrado el Equipo')</script>");
@@ -34,7 +34,7 @@ if (!$db->affected_rows()) {
 
 	//refresca la pagina
 	echo '<ul class="pager">';
-	
+
 	echo '<li class="previous"><a href="index.php">&larr; Se ha borrado el Suceso Id: '.$suceso_id.'</a></li></ul>';
-}    
+}
 ?>

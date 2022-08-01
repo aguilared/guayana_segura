@@ -62,7 +62,6 @@ $otra_fuente2 = $rs_suceso->Fields('otra_fuente2');
 $usuario = $rs_suceso->Fields('usuario');
 $fecha_ingreso_data = $rs_suceso->Fields('fecha_ingreso_data');
 $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
-
 ?>
 
 <!DOCTYPE html>
@@ -84,10 +83,10 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
     <div class="modal-content">
 		<div class="modal-body">
 			
-			<div class="panel panel-primary">
-				<div class="panel-heading">Modificacion del Historico Homicidios: <?php echo $ano; ?>
-				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">Modificacion del Historico Homicidios: <?php echo $ano; ?>
+			<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		</div>
 	    	
 	    	<div class="panel-body">
 		        <form class="form-horizontal" role="form" id="contactform">
@@ -151,8 +150,6 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
 							<input class="form-control input-sm" name="arma_contusa" id="arma_contusa" type="text" value="<?php echo $arma_contusa; ?>">
 						</div>
 					</div>
-
-					
 					
 					<div class="form-group">
 						<label class="control-label col-xs-2" for="enero">Enero:</label>
@@ -221,7 +218,6 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
 							<input class="form-control input-sm" name="diciembre" id="diciembre" type="text" value="<?php echo $diciembre; ?>">
 						</div>
 					</div>
-
 
 					<div class="form-group">
 						<label class="control-label col-xs-2" for="pa_cachamay">Cachamay:</label>
@@ -302,8 +298,6 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
 							<input class="form-control input-sm" name="otra_fuente2" id="otra_fuente2" type="text" value="<?php echo $otra_fuente2; ?>">
 						</div>
 					</div>
-				
-					
 
 					<div class="form-group">
 						<label class="control-label col-xs-3" for="fecha_ingreso_data">Fecha Ingreso:</label>
@@ -315,7 +309,6 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
 							<input class="form-control input-sm" name="fecha_modifi_data" id="fecha_modifi_data" type="text" value="<?php echo $fecha_modifi_data; ?>">
 						</div>
 					</div>
-
 
 					<div class="form-group">
 						<div class="control-label col-xs-4">
@@ -363,21 +356,29 @@ $fecha_modifi_data = $rs_suceso->Fields('fecha_modifi_data');
 				},
 				submitHandler: function(form){
 					var dataString = 'ano='+$('#ano').val()+'&usuario='+$('#usuario').val()+'&total='+$('#total').val()
-					+'&resueltos='+$('#resueltos').val()+'&impunidad='+$('#impunidad').val()
+					+'&resueltos='+$('#total_resueltos').val()+'&impunidad='+$('#impunidad').val()
 					+'&hombres='+$('#hombres').val()+'&menores='+$('#menores').val()+'&mujeres='+$('#mujeres').val()
 					+'&arma_d_fuego='+$('#arma_d_fuego').val()+'&arma_blanca='+$('#arma_blanca').val()+'&arma_contusa='+$('#arma_contusa').val()
+					+'&enero='+$('#enero').val()+'&febrero='+$('#febrero').val()+'&marzo='+$('#marzo').val()
+					+'&abril='+$('#abril').val()+'&mayo='+$('#mayo').val()+'&junio='+$('#junio').val()
+					+'&julio='+$('#julio').val()+'&agosto='+$('#agosto').val()+'&septiembre='+$('#septiembre').val()
+					+'&octubre='+$('#octubre').val()+'&noviembre='+$('#noviembre').val()+'&diciembre='+$('#diciembre').val()
 					+'&fuente='+$('#fuente').val()+'&otra_fuente1='+$('#otra_fuente1').val()+'&otra_fuente2='+$('#otra_fuente2').val();
-					//alert(dataString);
+					console.log(dataString);
+					alert(dataString);
 					$.ajax({
 						type: "POST",
 						url:"trata_modi_histo_homicidios.php",
 						data: dataString,
-						success: function(data){
+						success: function(data, textStatus, jqXHR){
 							$("#ok").html(data);
-							$("#ok").show();
+							$("#ok").show();  //colocar manejo de errores si no guardo
 							$("#contactform").hide();
-							location.reload();
-						}
+							location.reload();  //recargando
+						},
+						  error: function(XMLHttpRequest, textStatus, errorThrown) {
+							 alert("some error");
+						  }
 					});
 				}
 			});

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon simonbolivar</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.362503, lng: -62.663097},  
+
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+            {lat: 8.34815, lng: -62.68884}, //Bomba Borges
+            {lat: 8.34220, lng: -62.67554}, //Doña Barbara
+            {lat: 8.33847, lng: -62.65588}, //Redoma el dorado
+            {lat: 8.34416, lng: -62.65056}, //alcacranes hidrobolivar
+            {lat: 8.36089, lng: -62.64888}, //mercado el gallo bajando
+            {lat: 8.36131, lng: -62.64644}, //cerro el gallo bajando
+            {lat: 8.36522, lng: -62.64287}, //cerro el gallo
+            {lat: 8.36751, lng: -62.64754}, //batallas pricipal
+            {lat: 8.37192, lng: -62.65262}, //batallas
+            {lat: 8.37944, lng: -62.65850}, //Intercon muelle san felix con 11deabril
+            {lat: 8.34891, lng: -62.71605}, //limite norte
+            {lat: 8.34050, lng: -62.71189}, //Intercon Puente Angosturita dalla con simon bolivar
+        ];
+
+        // Construct the polygon.
+        var simonbolivarParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        simonbolivarParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        simonbolivarParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia simonbolivar</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon chirica</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.31647, lng: -62.63099},
+
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+            {lat: 8.33847, lng: -62.65588}, //Redoma el dorado
+            {lat: 8.34416, lng: -62.65056}, //alcacranes hidrobolivar
+            {lat: 8.36089, lng: -62.64888}, //mercado el gallo bajando
+            {lat: 8.36131, lng: -62.64644}, //cerro el gallo bajando
+            {lat: 8.36522, lng: -62.64287}, //cerro el gallo
+            {lat: 8.36377, lng: -62.63925}, //cerro el gallo americas
+            {lat: 8.36052, lng: -62.63412}, //once d abri 1 mayoo   BOD
+            {lat: 8.35504, lng: -62.63239}, //once d abri 1 mayoo   BOD
+            {lat: 8.32594, lng: -62.62435}, //entrada a trapichito
+            {lat: 8.31562, lng: -62.61726}, //cruce rosario 
+            {lat: 8.29859, lng: -62.59852}, //Limite yocoima este via a upata
+            {lat: 8.28657, lng: -62.61219}, //chirica vieja adentro
+            {lat: 8.28938, lng: -62.63468}, //Limite yocoima frent a fracisca duarte
+            {lat: 8.31613, lng: -62.6418}, //Buen retiro
+            {lat: 8.31976, lng: -62.6422}, //Buen retiro
+            {lat: 8.33201, lng: -62.64478}, //Cementerio semaforo bomba 
+
+
+            
+        ];
+
+        // Construct the polygon.
+        var chiricaParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        chiricaParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        chiricaParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia chirica</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

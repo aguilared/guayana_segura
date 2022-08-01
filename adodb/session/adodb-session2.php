@@ -2,7 +2,9 @@
 
 
 /*
-V5.19  23-Apr-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.21.0-dev  ??-???-2016
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
          Contributed by Ross Smith (adodb@netebb.com).
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
@@ -98,7 +100,7 @@ function adodb_session_regenerate_id()
 	} else {
 		session_id(md5(uniqid(rand(), true)));
 		$ck = session_get_cookie_params();
-		setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure']);
+		setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure'], $ck['httponly']);
 		//@session_start();
 	}
 	$new_id = session_id();
@@ -108,7 +110,7 @@ function adodb_session_regenerate_id()
 	if (!$ok) {
 		session_id($old_id);
 		if (empty($ck)) $ck = session_get_cookie_params();
-		setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure']);
+		setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure'], $ck['httponly']);
 		return false;
 	}
 
@@ -156,7 +158,7 @@ class ADODB_Session {
 	*/
 	static function driver($driver = null)
 	{
-		static $_driver = 'mysql';
+		static $_driver = 'mysqli';
 		static $set = false;
 
 		if (!is_null($driver)) {
@@ -581,6 +583,8 @@ class ADODB_Session {
 			} else {
 				$ok = $conn->Connect($host, $user, $password, $database);
 			}
+		} else {
+			$ok = true; // $conn->_connectionID is set after call to ADONewConnection
 		}
 
 		if ($ok) $GLOBALS['ADODB_SESS_CONN'] = $conn;

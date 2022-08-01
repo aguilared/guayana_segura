@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+  <link rel="stylesheet" type="text/css" href="https://developers.google.com/maps/documentation/javascript/examples/default.css">
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+var cityCircle;
+// Create an object containing LatLng, population.
+function loadCities(map) {
+  var citymap = {};
+  citymap['chicago'] = {
+    location: 'chicago',
+    population: 2842518
+  };
+  citymap['london'] = {
+    location: 'london',
+    population: 4000000
+  };
+
+
+  getLatLng(citymap['chicago'], function(city) { 
+      addCityToMap(city, map);
+  });
+
+  getLatLng(citymap['london'], function(city) { 
+      addCityToMap(city, map);
+  });
+}
+
+function getLatLng(city, callback){
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new Array(2);
+
+    // get Lat, Lang
+    geocoder.geocode({'address': city.location, 'region': 'UK'}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+            latlng[0] = results[0].geometry.location.lat();
+            latlng[1] = results[0].geometry.location.lng();
+
+            city.center = new google.maps.LatLng(latlng[0], latlng[1]);
+            callback(city); // call the callback function here
+        } else {
+            console.log( "Unable to find address: " + status );
+        }
+   });
+}
+
+function addCityToMap(city, map) {
+    // Construct the circle for each value in citymap. We scale population by 20.
+    var populationOptions = {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      center: city.center,
+      radius: city.population / 20
+    };
+    cityCircle = new google.maps.Circle(populationOptions);
+}
+
+function initialize() {
+  var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(37.09024, -30.712891),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  loadCities(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+//]]>  
+
+</script>
+
+
+</head>
+<body>
+  <div id="map-canvas"></div>
+
+</body>
+
+
+</html>

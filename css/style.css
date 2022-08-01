@@ -1,0 +1,158 @@
+.table-reporte > thead > tr > th, .table-reporte > tbody > tr > th, .table-reporte > tfoot > tr > th, .table-reporte > thead > tr > td, .table-reporte > tbody > tr > td, .table-reporte > tfoot > tr > td {
+  border:1px solid black;
+}
+.falla{
+  text-decoration: underline;
+}
+main{
+	padding-bottom: 20px;
+}
+footer{
+	border-top: 1px solid #eee;
+}
+
+
+.page-header {
+  padding-bottom: 9px;
+  margin: 0px 0 0px;
+  border-bottom: 2px solid red;
+}
+
+.page-header h1{
+	font-size:1.85em;
+}
+.panel-default{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* .titulo{
+  border-left: 1px solid red;
+   border-right: 1px solid red;
+}
+ */
+
+ @media screen and (max-width: 767px) {
+    .up{
+    padding-top: 0px;
+    
+  }
+  .up h1{
+    margin:0.2em;
+    font-size: 1.50em;
+  }
+  .up h2{
+    
+    font-size: 1em;
+  }
+ }
+@media (min-width: 768px) {
+  .up{
+    padding-top: 0px;
+    
+  }
+  .up h1{
+    margin:0.2em;
+    font-size: 1.75em;
+  }
+
+}
+@media (min-width: 992px) {
+  .up{
+    padding-top: 0px;
+    
+  }
+  .up h1{
+    margin:0.2em;
+    font-size: 2em;
+  }
+
+}
+@media (min-width: 1200px) {
+  .up{
+    padding-top: 0px;
+    
+  }
+  .up h1{
+    margin:0.2em;
+    font-size: 2em;
+  }
+
+
+}
+ 
+
+  .up-sub{
+    background-color: #3498db!important;
+    color:#FFF !important;
+    margin-top: 0px!important;
+    padding-top: 0px!important;
+  }
+
+.main{
+  margin-top:50px !important;
+}
+
+.left{
+
+
+}
+
+.left-menu{
+  background-color: #eee;
+  margin-left: 15px;
+}
+.topMenu{
+  color: #333333 !important;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+  background-color: #3498db!important;
+  color:#FFF !important;
+}
+
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-muted {
+  color: #999;
+}
+.text-danger{
+  color:red;
+}
+
+.text-primary{
+  color:#2980b9;
+}
+
+
+.table > tbody > tr > td{
+    
+    padding: 0px;
+    
+}
+
+.rojo{
+  color: red;
+  background-color:red;
+  border-color: red;
+  height: 3px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+}
+
+.up-sub a{
+  text-decoration: underline;
+  color: white;
+}

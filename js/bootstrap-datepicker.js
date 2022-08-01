@@ -418,9 +418,10 @@
 				windowHeight = $window.height(),
 				scrollTop = $window.scrollTop();
 
+			// zindex modificado para el picker en modal
 			var zIndex = parseInt(this.element.parents().filter(function() {
 							return $(this).css('z-index') != 'auto';
-						}).first().css('z-index'))+10;
+						}).first().css('z-index'))+9999;
 			var offset = this.component ? this.component.parent().offset() : this.element.offset();
 			var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
 			var width = this.component ? this.component.outerWidth(true) : this.element.outerWidth(false);

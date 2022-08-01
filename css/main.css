@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   Linux Táchira custom styles
+   ========================================================================== */
+
+.altonews{
+ height:510px;
+}
+
+.altosuceso{
+ height:290px;
+}
+
+.altoimagen{
+ max-height:200px;
+ max-width: 100%;
+}
+
+.altoimagen1{
+ max-height:400px;
+ max-width: 100%;
+}
+
+.container-fluid {
+  padding-right: 10px;
+  padding-left: 10px; }
+
+.container-fluid.header {
+  padding-right: 15px;
+  padding-left: 15px; }
+
+p {
+  font-size: 1.8rem;
+  margin-bottom: 10px; }
+
+.main-image {
+  width: 100%;
+  height: 120px;
+  background: url("../images/ciudadguayana.png") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative; }
+  .main-image .creditos {
+    bottom: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    color: #fff;
+    text-shadow: 0 0 5px #000; }
+    .main-image .creditos a {
+      color: #fff;
+      text-shadow: 0 0 5px #000; }
+  .main-image .greeting {
+    margin-bottom: 10px;
+    padding: 10px 0 0 10px; }
+    .main-image .greeting h3 {
+      margin-top: 4px; }
+    .main-image .greeting img {
+      width: 8%;
+      height: auto;
+      float: left; }
+    .main-image .greeting .quienes-somos {
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      margin-left: 30px;
+      padding: 2px;
+      width: 45%;
+      float: left; }
+
+      .main-image .greeting .social {
+        background: rgba(255, 255, 255, 0.55);
+        border-radius: 20px;
+        margin-left: 88px;
+        padding: 2px;
+        width: 10%;
+        float: right; }
+
+h3 {
+  font-size: 3.2rem;
+  border-bottom: #fbe502 1px double;
+  margin: 10px 0;
+  padding-bottom: 15px; }
+
+
+
+.lista-correo img {
+  display: inline-block; }
+.lista-correo form div:first-child {
+  padding-left: 0; }
+
+.eventos #contacto {
+  margin-bottom: 40px; }
+.eventos ul {
+  padding-left: 0; }
+  .eventos ul li {
+    display: inline-block;
+    padding: 10px;
+    color: #FFF;
+    list-style: none;
+    font-size: 1rem;
+    margin-bottom: 4px; }
+    .eventos ul li:nth-child(odd) {
+      background-color: #fbe502;
+      color: #000; }
+    .eventos ul li:nth-child(even) {
+      background-color: black; }
+
+textarea {
+  width: 100%; }
+
+address {
+  margin-bottom: 0; }
+
+footer {
+  background: #fae401 none repeat scroll 0% 0%;
+  border-top: 2px solid black;
+  padding: 8px 0px;
+  font-size: 1.2rem;
+  margin-top: 25px; }
+  footer p {
+    margin-top: 5px;
+    font-size: 1.2rem; }
+
+/** Responsive */
+@media screen and (max-width: 1024px) {
+  .main-image {
+    height: auto;
+    padding-bottom: 40px; }
+    .main-image .greeting {
+      padding-left: 0; }
+      .main-image .greeting img, .main-image .greeting .quienes-somos {
+        float: none;
+        margin: 0  auto; }
+      .main-image .greeting .quienes-somos {
+        margin-top: 10px;
+        width: 95%; }
+
+  .email {
+    display: none; } }
+/** Aceptar las cookies */
+.contcookies {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  background: rgba(100, 100, 100, 0.85);
+  text-align: center;
+  box-shadow: 0 -2px 2px #aaa;
+  border-top: 1px solid #888;
+  color: #ccc; }
+
+.contcookies a {
+  text-decoration: none;
+  color: #dd6 !important; }
+
+.contcookies a.cookiesaceptar {
+  padding: 4px;
+  font-size: 90%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #ddd;
+  color: #294 !important;
+  font-weight: 700;
+  text-shadow: none; }
+
+
+/*# sourceMappingURL=main.css.map */

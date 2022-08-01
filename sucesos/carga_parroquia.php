@@ -21,12 +21,12 @@ $rs_parroquias = $db->Execute($query_parroquias);
 <div class="field">
     <div class="label">Detalle:</div>
     <select name="parroquia" id="parroquia">
-        <option selected value="0" >Seleccione</option>
-        <?php while(!$rs_parroquias->EOF){ ?>
-            <option value="<?php echo $rs_parroquias->Fields('parroquia_id'); ?>"><?php echo $rs_parroquias->Fields('parroquia_id') ." ".$rs_parroquias->Fields('descripcion'); ?></option>
-        <?php $rs_parroquias->MoveNext();
-        }
-        $rs_parroquias->MoveFirst();?>
+      <option selected value="" >Seleccione</option>
+      <?php while(!$rs_parroquias->EOF){ ?>
+          <option value="<?php echo $rs_parroquias->Fields('parroquia_id'); ?>"><?php echo $rs_parroquias->Fields('parroquia_id') ." ".$rs_parroquias->Fields('descripcion'); ?></option>
+      <?php $rs_parroquias->MoveNext();
+      }
+      $rs_parroquias->MoveFirst();?>
 
     </select>
 </div>

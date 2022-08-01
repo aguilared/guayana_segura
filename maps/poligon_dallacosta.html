@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon dallacosta</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.285465, lng: -62.719059},
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+            {lat: 8.34050, lng: -62.71189}, //Intercon Puente Angosturita dalla con simon bolivar
+            {lat: 8.32598, lng: -62.69794}, //campo rojo
+            {lat: 8.32309, lng: -62.69142}, //Puente Campo Rojo
+            {lat: 8.31902, lng: -62.66601}, //Puente Macagua
+            {lat: 8.31664, lng: -62.65932}, 
+            {lat: 8.27638, lng: -62.67082}, //FRENTE AL ITALO
+            {lat: 8.25388, lng: -62.70915},// Toma de agua toromuerto
+            {lat: 8.25000, lng: -62.70915},// Fin sur     
+            {lat: 8.24844, lng: -62.68773},// Fin sur 2    
+            {lat: 8.27859, lng: -62.65760},// intermedio    
+            {lat: 8.29201, lng: -62.63401}, // en via al pao 
+            {lat: 8.31976, lng: -62.6422}, //Buen retiro
+            {lat: 8.33201, lng: -62.64478}, //Cementerio semaforo bomba 
+            {lat: 8.33847, lng: -62.65588}, //Redoma el dorado
+            {lat: 8.34220, lng: -62.67554}, //Doña Barbara
+            {lat: 8.34815, lng: -62.68884}, //Bomba Borges
+
+        ];
+
+        // Construct the polygon.
+        var dallacostaParroquia = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        dallacostaParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        dallacostaParroquia.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia dallacosta</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

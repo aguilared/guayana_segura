@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon PUNTA PAITILLA </title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle.
+      // When the user clicks on the polygon an info window opens, showing
+      // information about the polygon's coordinates.
+
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: {lat: 8.97556669877889, lng: -79.518216495831894},
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon.
+        var triangleCoords = [
+            {lat: 8.97556669877889, lng: -79.518216495831894},
+            {lat: 8.97462697462638, lng: -79.518324841947702},
+            {lat: 8.973687250305669, lng: -79.518433187114596},
+            {lat: 8.973698150813471, lng: -79.518006094638594},
+            {lat: 8.973862470967561, lng: -79.517827112687499},
+            {lat: 8.973558266750871, lng: -79.517611472239807},
+            {lat: 8.9729471816892, lng: -79.518043192091795},// Intercecion unare cachamay rio orinoco
+            {lat: 8.971940915425019, lng: -79.518168349494701}, //
+            {lat: 8.97141649177602, lng: -79.518379593855599}, //
+            {lat: 8.97091184019197, lng: -79.518062464527205}, //
+            {lat: 8.970474167236871, lng: -79.518075244466601}, //
+            {lat: 8.97016009547049, lng: -79.517734907077696}, //
+            {lat: 8.96952834272153, lng: -79.517466449942205}, //
+            {lat: 8.969554668979161, lng: -79.516883922997593}, //
+            {lat: 8.97052258810613, lng: -79.516626269282199}, //
+            {lat: 8.97043539931534, lng: -79.5163325297829}, //
+            {lat: 8.970561605448751, lng: -79.516349323727795}, //
+            {lat: 8.970589504585449, lng: -79.516158910751699}, //
+            {lat: 8.970289781045, lng: -79.515762241011004}, //
+            {lat: 8.970438769770491, lng: -79.515744338132606}, //
+            {lat: 8.97039205136671, lng: -79.515531165173599}, //
+            {lat: 8.970739856536809, lng: -79.515051133245606}, //
+            {lat: 8.97099199062564, lng: -79.515015513177502}, //
+            {lat: 8.97093398282068, lng: -79.514848512623701}, //
+            {lat: 8.971339284805101, lng: -79.514408615462301}, //
+            {lat: 8.97197565880411, lng: -79.514400261031199}, //
+            {lat: 8.972020879779279, lng: -79.514238615167798}, //
+            {lat: 8.971704828571561, lng: -79.514061132570006}, //
+            {lat: 8.971894558300271, lng: -79.513741302079396}, //
+            {lat: 8.97262585422437, lng: -79.513765972843103}, //
+            {lat: 8.97245440639924, lng: -79.513512309220005}, //
+            {lat: 8.972781776448929, lng: -79.512891665443306}, //
+            {lat: 8.972032690069231, lng: -79.5132320086676,}, //
+            {lat: 8.972363031206481, lng: -79.512666665522602}, //
+            {lat: 8.97278539273967, lng: -79.5124244072816}, //
+            {lat: 8.97306635824105, lng: -79.512569791919802}, //
+            {lat: 8.97336704049512, lng: -79.512148322955099}, //
+            {lat: 8.973592182092609, lng: -79.512081052624794}, //
+            {lat: 8.97482678775093, lng: -79.512171867764295}, //
+            {lat: 8.975024004963579, lng: -79.511994113084896}, //
+            {lat: 8.97495252120331, lng: -79.511537289640003}, //
+            {lat: 8.974629724566149, lng: -79.511472261673802}, //
+            {lat: 8.97495544940616, lng: -79.511352969415498}, //
+            {lat: 8.97489619355324, lng: -79.511202070274393}, //
+            {lat: 8.973793350130199, lng: -79.5112950379648}, //
+            {lat: 8.973750988937979, lng: -79.511697020705597}, //
+            {lat: 8.9735001648438, lng: -79.511303599806993}, //
+            {lat: 8.973649810328681, lng: -79.511148166203697}, //
+            {lat: 8.97468666616806, lng: -79.511049046619107}, //
+            {lat: 8.974527504564859, lng: -79.510360345931701}, //
+            {lat: 8.9748594908452, lng: -79.510280342547404}, //
+            {lat: 8.97469796856846, lng: -79.510217104048493}, //
+            {lat: 8.97489779547832, lng: -79.510083582391104}, //
+            {lat: 8.97444806910678, lng: -79.510051013433696}, //
+            {lat: 8.974412375842229, lng: -79.509682525136398}, //
+            {lat: 8.97427526520921, lng: -79.5096142672258}, //
+            {lat: 8.9744116221169, lng: -79.509495746663802}, //
+            {lat: 8.974344322958119, lng: -79.508562141344299}, //
+            {lat: 8.97447509295001, lng: -79.508271612930997}, //
+            {lat: 8.97523556244102, lng: -79.5085151208403}, //
+            {lat: 8.97539559511249, lng: -79.508565910727995}, //
+            {lat: 8.975874297789019, lng: -79.508767061758803}, //
+            {lat: 8.97580171720527, lng: -79.508993455850401}, //
+            {lat: 8.976103570392221, lng: -79.509217701390597}, //
+            {lat: 8.97628355359959, lng: -79.509139691429198}, //
+            {lat: 8.97690404691906, lng: -79.509888237180107}, //
+            {lat: 8.97772307397776, lng: -79.509960767100907}, //
+            {lat: 8.977721128890311, lng: -79.512973192531106}, //
+            {lat: 8.977721128481139, lng: -79.5129735399439}, //
+            {lat: 8.97791687929381, lng: -79.514742330031297}, //
+            {lat: 8.978373968223661, lng: -79.518110905698194}, //
+            {lat: 8.978824666933191, lng: -79.518720345110907}, //
+            {lat: 8.978645482441809, lng: -79.5188617437571}, //
+            {lat: 8.978074530946561, lng: -79.519091348754799}, //
+            {lat: 8.97799801081444, lng: -79.519122120591902}, //
+            {lat: 8.976752773144961, lng: -79.519336574671499}, //
+            {lat: 8.976335533440629, lng: -79.518942549947596}, //
+            {lat: 8.97556669877889, lng: -79.518216495831894}, //
+            //fin este
+        ];
+     //-,8.976752773144961 -79.518942549947596,8.976335533440629 -79.518216495831894,8.97556669877889</coordinates></LinearRing></outerBoundaryIs></Polygon>
+
+        // Construct the polygon.
+        var puntaPaitilla = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        puntaPaitilla.setMap(map);
+
+        // Add a listener for the click event.
+        puntaPaitilla.addListener('click', showArrays);
+
+        infoWindow = new google.maps.InfoWindow;
+      }
+
+      /** @this {google.maps.Polygon} */
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia Cachamay</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>

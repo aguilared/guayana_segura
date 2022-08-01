@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon Auto-completion</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a simple polygon representing the Bermuda Triangle. Note
+      // that the code specifies only three LatLng coordinates for the polygon. The
+      // API automatically draws a stroke connecting the last LatLng back to the first
+      // LatLng.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 8.285465, lng: -62.719059},
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon's path. Note that there's
+        // no need to specify the final coordinates to complete the polygon, because
+        // The Google Maps JavaScript API will automatically draw the closing side.
+         var cachamayCoords = [
+            {lat: 8.33414, lng: -62.71554}, 
+            {lat: 8.33758, lng: -62.71425},
+            {lat: 8.33932, lng: -62.71674}, 
+            {lat: 8.34383, lng: -62.72241}, 
+            {lat: 8.3423, lng: -62.74713}, 
+            {lat: 8.33567, lng: -62.76481}, 
+            {lat: 8.31516, lng: -62.75979}, 
+            {lat: 8.29703, lng: -62.75202}, 
+            {lat: 8.30234, lng: -62.73138}, 
+            {lat: 8.29908, lng: -62.72012}, 
+            {lat: 8.30194, lng: -62.7123}, 
+            {lat: 8.3158, lng: -62.68722}
+        ];
+
+          // Define the LatLng coordinates for the polygon.
+        var universidadCoords = [
+          {lat: 8.30671, lng: -62.68439}, 
+          {lat: 8.30251, lng: -62.67898}, 
+          {lat: 8.29864, lng: -62.68267}, 
+          {lat: 8.28463, lng: -62.68868}, 
+          {lat: 8.28132, lng: -62.70044}, 
+          {lat: 8.27512, lng: -62.71116}, 
+          {lat: 8.27134, lng: -62.7181}, 
+          {lat: 8.26365, lng: -62.7197}, 
+          {lat: 8.25724, lng: -62.71882}, 
+          {lat: 8.2493, lng: -62.71795}, 
+          {lat: 8.25448, lng: -62.72654}, 
+          {lat: 8.25695, lng: -62.73046}, 
+          {lat: 8.25984, lng: -62.73386}, 
+          {lat: 8.26444, lng: -62.7296}, 
+          {lat: 8.26504, lng: -62.73257}, 
+          {lat: 8.26717, lng: -62.73435}, 
+          {lat: 8.27397, lng: -62.73618}, 
+          {lat: 8.28184, lng: -62.73952}, 
+          {lat: 8.28835, lng: -62.74715}, 
+          {lat: 8.29644, lng: -62.75005}, 
+          {lat: 8.29901, lng: -62.73972}, 
+          {lat: 8.30259, lng: -62.72975}, 
+          {lat: 8.29933, lng: -62.71849}, 
+          {lat: 8.301, lng: -62.71016}, 
+          {lat: 8.30121, lng: -62.70698}, 
+          {lat: 8.3026, lng: -62.7038}, 
+          {lat: 8.30573, lng: -62.69744}, 
+          {lat: 8.31106, lng: -62.69014}, 
+          {lat: 8.31232, lng: -62.68662}
+        ];
+
+        var cachamayParroquia = new google.maps.Polygon({
+          paths: cachamayCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        cachamayParroquia.setMap(map);
+
+        // Construct the polygon.
+        var universidadParroquia = new google.maps.Polygon({
+          paths: universidadCoords,
+          strokeColor: '##bde4d3',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '##bde4d3',
+          fillOpacity: 0.35
+        });
+        universidadParroquia.setMap(map);
+
+        // Add a listener for the click event.
+        universidadParroquia.addListener('click', showArraysUni);
+
+        infoWindow = new google.maps.InfoWindow;
+
+        /** @this {google.maps.Polygon} */
+      function showArraysUni(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Parroquia Universidad</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+        
+
+        infoWindow.open(map);
+      }
+
+      }
+    </script>
+    <script 
+      async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEOrxkZ8QcVLGQ3SCJHqoT8rGLf_vC0to&callback=initMap">
+    </script>
+  </body>
+</html>
